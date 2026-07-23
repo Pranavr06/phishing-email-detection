@@ -3,6 +3,10 @@ import joblib
 import pandas as pd
 import json
 import os
+from src.features.build_features import (
+    URLFeatureExtractor, HTMLFeatureExtractor, 
+    PunctuationFeatureExtractor, UrgencyFeatureExtractor
+)
 
 # Page Config
 st.set_page_config(page_title="AI Phishing Detection", page_icon="🛡️", layout="centered")
