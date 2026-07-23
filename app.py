@@ -65,7 +65,7 @@ def load_metadata():
         return json.load(f)
 
 # Header
-st.title("AI-Driven Phishing Email Detection 🛡️")
+st.title("🛡️ AI-Driven Phishing Email Detection")
 st.markdown("### NLP & Machine Learning Based Email Threat Analysis")
 
 st.markdown("""
