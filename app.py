@@ -65,7 +65,7 @@ def load_metadata():
         return json.load(f)
 
 # Header
-st.title("🛡️ AI-Driven Phishing Email Detection")
+st.title("AI-Driven Phishing Email Detection 🛡️")
 st.markdown("### NLP & Machine Learning Based Email Threat Analysis")
 
 st.markdown("""
@@ -108,10 +108,10 @@ if analyze and (subject or body):
         # Result Display
         st.divider()
         if is_phishing:
-            st.error(f"## 🚨 CLASSIFICATION: PHISHING")
+            st.error(f"## CLASSIFICATION: PHISHING 🚨")
             st.markdown(f"**Model probability:** {phishing_prob * 100:.2f}%", help="This probability reflects the model's output and is not a guarantee that the email is safe or malicious.")
         else:
-            st.success(f"## ✅ CLASSIFICATION: LEGITIMATE")
+            st.success(f"## CLASSIFICATION: LEGITIMATE ✅")
             st.markdown(f"**Model probability:** {legit_prob * 100:.2f}%", help="This probability reflects the model's output and is not a guarantee that the email is safe or malicious.")
             
         # Indicators
