@@ -1,8 +1,11 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
 import streamlit as st
 import joblib
 import pandas as pd
 import json
-import os
 from src.features.build_features import (
     URLFeatureExtractor, HTMLFeatureExtractor, 
     PunctuationFeatureExtractor, UrgencyFeatureExtractor
@@ -44,11 +47,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-@st.cache_resource
 def load_model():
-    if not os.path.exists("models/final_pipeline.joblib"):
-        return None
-    return joblib.load("models/final_pipeline.joblib")
+    try:
+        if not os.path.exists("models/final_pipeline.joblib"): return None
+        return joblib.load("models/final_pipeline.joblib")
+    except Exception as e:
+        import traceback
+        st.error(f"Unpickling Error: {str(e)}")
+        st.code(traceback.format_exc())
+        st.stop()
 
 @st.cache_data
 def load_metadata():
