@@ -116,18 +116,23 @@ if analyze and (subject or body):
         punct_feats = PunctuationFeatureExtractor().transform(df)
         urg_feats = UrgencyFeatureExtractor().transform(df)
         
-        st.markdown('<div class="indicator-box">', unsafe_allow_html=True)
-        st.markdown(f"- **Real URLs detected:** {url_feats['num_real_urls'].iloc[0]}")
-        st.markdown(f"- **Masked [URL] tokens:** {url_feats['num_masked_urls'].iloc[0]}")
-        st.markdown(f"- **HTML detected:** {'Yes' if html_feats['has_html'].iloc[0] == 1 else 'No'} ({html_feats['num_html_tags'].iloc[0]} tags, {html_feats['num_anchor_tags'].iloc[0]} links)")
-        st.markdown(f"- **Exclamation marks:** {punct_feats['num_exclamation_marks'].iloc[0]}")
-        st.markdown(f"- **Uppercase ratio:** {punct_feats['uppercase_ratio'].iloc[0]:.2f}")
-        st.markdown(f"- **Urgency phrases detected:** {urg_feats['urgency_keyword_count'].iloc[0]}")
-        st.markdown('</div>', unsafe_allow_html=True)
+        indicators_html = f"""
+        <div class="indicator-box">
+            <ul>
+                <li><b>Real URLs detected:</b> {url_feats['num_real_urls'].iloc[0]}</li>
+                <li><b>Masked [URL] tokens:</b> {url_feats['num_masked_urls'].iloc[0]}</li>
+                <li><b>HTML detected:</b> {'Yes' if html_feats['has_html'].iloc[0] == 1 else 'No'} ({html_feats['num_html_tags'].iloc[0]} tags, {html_feats['num_anchor_tags'].iloc[0]} links)</li>
+                <li><b>Exclamation marks:</b> {punct_feats['num_exclamation_marks'].iloc[0]}</li>
+                <li><b>Uppercase ratio:</b> {punct_feats['uppercase_ratio'].iloc[0]:.2f}</li>
+                <li><b>Urgency phrases detected:</b> {urg_feats['urgency_keyword_count'].iloc[0]}</li>
+            </ul>
+        </div>
+        """
+        st.markdown(indicators_html, unsafe_allow_html=True)
         
         with st.expander("Technical Analysis / Model Metadata"):
             if metadata:
-                st.json(metadata)
+                st.code(json.dumps(metadata, indent=4), language="json")
             else:
                 st.write("Metadata not available.")
                 
