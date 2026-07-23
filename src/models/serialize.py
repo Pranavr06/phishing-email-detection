@@ -14,9 +14,9 @@ def serialize_model():
     X = df[['Subject', 'Body']]
     y = df['Label']
 
-    print("Building and fitting Logistic Regression pipeline on full dataset...")
-    # Using Logistic Regression as it's the fastest and achieved equal (1.0) performance
-    pipe = build_training_pipeline("logistic_regression", stop_words=None, remove_masked_urls=False)
+    print("Building and fitting Random Forest pipeline on full dataset...")
+    # Using Random Forest as it's the fastest and achieved equal (1.0) performance
+    pipe = build_training_pipeline("random_forest", stop_words=None, remove_masked_urls=False)
     pipe.fit(X, y)
 
     print("Saving pipeline...")
