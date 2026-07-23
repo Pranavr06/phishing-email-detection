@@ -75,8 +75,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Main input card
-subject = st.text_input("Subject")
-body = st.text_area("Email Body", height=250)
+subject = st.text_input("Subject", key="subject_input")
+body = st.text_area("Email Body", height=250, key="body_input")
 
 model = load_model()
 metadata = load_metadata()
@@ -90,6 +90,10 @@ with col1:
     analyze = st.button("Analyze Email")
 with col2:
     if st.button("Clear / Reset"):
+        if "subject_input" in st.session_state:
+            del st.session_state["subject_input"]
+        if "body_input" in st.session_state:
+            del st.session_state["body_input"]
         st.rerun()
 
 if analyze and (subject or body):
